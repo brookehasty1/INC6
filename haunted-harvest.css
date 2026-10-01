@@ -152,3 +152,316 @@ body {
     from { transform: translateX(-100%); }
     to   { transform: translateX(100%); }
   }
+
+/* ===== Merged additions ===== */
+/* ===== Halloween Color Palette & Variables ===== */
+:root {
+  --pumpkin: #ff7518;
+  --candy-purple: #5a189a;
+  --spider-black: #1a1423;
+  --slime-green: #8ac926;
+  --ghost-white: #f6f2f8;
+  --candle-glow: #ffd60a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ===== Base ===== */
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--spider-black);
+  overflow: hidden; 
+}
+
+/* Background */
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: url("assets/images/graveyard1.png") center bottom / cover no-repeat;
+}
+
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 12px var(--pumpkin)); }
+  50%      { opacity: 0.75; }
+}
+
+.pumpkin-glow {
+  animation: flicker 2.5s ease-in-out infinite;
+}
+
+/* Fog drift */
+@keyframes drift {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+/*
+ BULLET 1: A couple walking hand-in-hand along a path
+*/
+.couple {
+  position: fixed;
+  bottom: 12%;
+  left: -150px;
+  font-size: 55px;
+  z-index: 5;
+  animation: couple-walk 18s linear infinite;
+}
+
+@keyframes couple-walk {
+  from { left: -150px; }
+  to   { left: 110%; }
+}
+
+/*
+ Bullet 2: A black cat trotting behind them
+*/
+.black-cat {
+  position: fixed;
+  bottom: 11%;
+  left: -220px;
+  font-size: 35px;
+  z-index: 5;
+  animation: cat-trot 18s linear infinite;
+}
+
+@keyframes cat-trot {
+  from { left: -220px; transform: scaleX(-1) translateY(0); }
+  25%  { transform: scaleX(-1) translateY(-5px); }
+  50%  { transform: scaleX(-1) translateY(0); }
+  75%  { transform: scaleX(-1) translateY(-5px); }
+  to   { left: calc(110% - 70px); transform: scaleX(-1) translateY(0); }
+}
+
+/*
+ ZOMBIE HAND
+*/
+.zombie-hand {
+  position: fixed;
+  bottom: 9%;
+  left: 68%;
+  width: 60px;
+  height: 90px;
+  z-index: 5;
+  overflow: hidden;            
+}
+
+.zombie-hand .arm {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 16px;
+  height: 60px;
+  margin-left: -8px;
+  background: linear-gradient(90deg, #5b7d2a, var(--slime-green), #5b7d2a);
+  border-radius: 8px 8px 0 0;
+}
+
+.zombie-hand .hand {
+  position: absolute;
+  left: 50%;
+  bottom: 48px;
+  font-size: 38px;
+  line-height: 1;
+  transform: translateX(-50%);
+  filter: hue-rotate(50deg) saturate(1.4) brightness(0.85);  
+}
+
+.zombie-hand .rise {
+  position: absolute;
+  inset: 0;
+  transform-origin: bottom center;
+  animation: zombie-rise 7s ease-in-out infinite;
+}
+
+@keyframes zombie-rise {
+  0%, 15%  { transform: translateY(100%) rotate(0deg); }
+  30%      { transform: translateY(0) rotate(-6deg); }
+  40%      { transform: translateY(0) rotate(6deg); }
+  50%      { transform: translateY(0) rotate(-6deg); }
+  60%      { transform: translateY(0) rotate(4deg); }
+  80%, 100% { transform: translateY(100%) rotate(0deg); }
+}
+
+
+.zombie-hand::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 14px;
+  background: #0b1a33;
+  border-radius: 50% 50% 0 0;
+}
+
+/*
+ Bullet 6: A cyclist passes in the distance
+*/
+.cyclist {
+  position: fixed;
+  bottom: 18%;
+  left: -80px;
+  transform: scaleX(-1);
+  font-size: 46px;
+  z-index: 4;
+  filter: brightness(0) drop-shadow(0 0 1px var(--ghost-white));
+  opacity: 0.85;
+  animation: cyclist-pass 14s linear infinite,
+             pedal 0.5s ease-in-out infinite alternate;
+  animation-delay: -4s, 0s;
+}
+
+@keyframes cyclist-pass {
+  from { left: -80px; }
+  to   { left: 110%; }
+}
+
+@keyframes pedal {
+  from { margin-bottom: 0; }
+  to   { margin-bottom: 3px; }
+}
+
+/*
+ Bullet 4: clouds drifting across a glowing full moon
+*/
+.moon {
+  position: fixed;
+  top: 10%;
+  right: 15%;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+ 
+  background:
+    radial-gradient(circle at 30% 32%, rgba(90, 90, 100, 0.55) 0 9%, rgba(90, 90, 100, 0) 10%),
+    radial-gradient(circle at 62% 24%, rgba(90, 90, 100, 0.5) 0 6%, rgba(90, 90, 100, 0) 7%),
+    radial-gradient(circle at 70% 55%, rgba(90, 90, 100, 0.55) 0 12%, rgba(90, 90, 100, 0) 13%),
+    radial-gradient(circle at 38% 68%, rgba(90, 90, 100, 0.5) 0 8%, rgba(90, 90, 100, 0) 9%),
+    radial-gradient(circle at 20% 55%, rgba(90, 90, 100, 0.4) 0 4%, rgba(90, 90, 100, 0) 5%),
+    radial-gradient(circle at 55% 82%, rgba(90, 90, 100, 0.4) 0 5%, rgba(90, 90, 100, 0) 6%),
+    radial-gradient(circle at 35% 35%, #e4e2d8 0%, #c2c0b6 60%, #9b998f 100%);
+  box-shadow: 0 0 20px rgba(220, 225, 240, 0.35),
+              0 0 50px rgba(190, 200, 230, 0.2);
+  z-index: 2;
+}
+
+.cloud {
+  position: fixed;
+  left: -250px;
+  width: 180px;
+  height: 45px;
+  background: rgba(246, 242, 248, 0.35);
+  border-radius: 50px;
+  z-index: 3;
+  animation: cloud-drift 25s linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 75px;
+  height: 75px;
+  left: 30px;
+  top: -35px;
+}
+
+.cloud::after {
+  width: 60px;
+  height: 60px;
+  right: 30px;
+  top: -25px;
+}
+
+.cloud1 {
+  top: 13%;
+  animation-duration: 25s;
+}
+
+.cloud2 {
+  top: 20%;
+  animation-duration: 32s;
+  animation-delay: -10s;
+}
+
+.cloud3 {
+  top: 8%;
+  animation-duration: 40s;
+  animation-delay: -20s;
+}
+
+@keyframes cloud-drift {
+  from { left: -250px; }
+  to   { left: 110%; }
+}
+
+/* ===== MERGE LAYERING FIX =====
+   Keep the full-screen graveyard background behind BOTH teammates' scene elements.
+*/
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+main {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    isolation: isolate;
+}
+
+/* Background image is the bottom layer */
+.background {
+    z-index: 0;
+}
+
+/* Partner elements must sit above the background */
+.orbs {
+    z-index: 6;
+}
+
+.graveyard {
+    z-index: 6;
+}
+
+.trees {
+    z-index: 5;
+}
+
+/* Added animated elements remain visible above the scene */
+.couple,
+.black-cat,
+.zombie-hand {
+    z-index: 8;
+}
+
+.cyclist {
+    z-index: 7;
+}
+
+.moon {
+    z-index: 2;
+}
+
+.cloud {
+    z-index: 3;
+}
