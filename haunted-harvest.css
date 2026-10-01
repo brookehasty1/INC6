@@ -16,6 +16,113 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
+  /* Couple Walking */
+.orbs {
+    position: fixed;
+    left: 0;
+    font-size: 50px;
+    animation: orbsMove 2s linear infinite, blink 1.5s ease-in-out infinite;
+}
+
+.orb1 {
+    top: 20px;
+    animation-duration: 4s, 1.5s;
+}
+
+.orb2 {
+    top: 50px;
+    animation-duration: 5s, 1.2s;
+}
+
+.orb3 {
+    top: 100px;
+    animation-duration: 2s, 2s;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}
+
+@keyframes orbsMove {
+    from {
+        transform: translateX(-100px);
+    }
+
+    to {
+        transform: translateX(100vw);
+    }
+}
+
+/* Graveyard Positon to screen */
+.graveyard {
+    position: fixed;
+    bottom: 50px;
+    left: 50%; 
+    transform: translateX(-50%);
+    display: flex;
+    gap: 100px;
+}
+
+/* Graveyard Positon to each other */
+.grave-container {
+    position: relative;
+    display: inline-block;
+    margin: 50px;
+}
+
+.grave {
+    font-size: 50px;
+}
+
+
+.ghost {
+    display: none;
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+}
+
+.grave:hover + .ghost {
+    display: block;
+}
+
+/* tree Positon to each other */
+.trees {
+    position: fixed;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 50px; /* distance between trees */
+    justify-content: center;
+    align-items: flex-end; 
+
+}
+
+.tree {
+    width: 212px;
+    height: auto;
+    animation: sway 3s ease-in-out infinite;
+}
+
+@keyframes sway {
+    0%, 100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+}
   
   /* Reduced Motion Preferences */
   @media (prefers-reduced-motion: reduce) {
